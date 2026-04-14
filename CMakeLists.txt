@@ -98,6 +98,7 @@ include_directories(
 ## Declare a cpp library
 add_library(dynamicvoronoi
   src/bucketedqueue.cpp src/dynamicvoronoi.cpp
+  src/bucketedqueue3d.cpp src/dynamicvoronoi3d.cpp
 )
 
 ## Declare a cpp executable

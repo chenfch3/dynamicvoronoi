@@ -11,4 +11,14 @@ public:
   int x,y;
 };
 
+#define INTPOINT3 IntPoint3
+
+/*! A light-weight integer point with fields x,y,z */
+class IntPoint3 {
+public:
+  IntPoint3() : x(0), y(0), z(0) {}
+  IntPoint3(int _x, int _y, int _z) : x(_x), y(_y), z(_z) {}
+  int x,y,z;
+};
+
 #endif
