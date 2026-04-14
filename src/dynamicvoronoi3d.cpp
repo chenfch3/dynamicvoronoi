@@ -5,7 +5,6 @@
 #include <string.h>
 
 DynamicVoronoi3D::DynamicVoronoi3D() {
-  sqrt2 = sqrt(2.0);
   data = NULL;
   gridMap = NULL;
 }
@@ -192,7 +191,10 @@ void DynamicVoronoi3D::update(bool updateRealDist) {
     if (c.queueing == fwProcessed) continue;
 
     if (c.needsRaise) {
-      // RAISE: propagate invalidation to neighbors
+      // RAISE: propagate invalidation to neighbors.
+      // The boundary check nx<=0 || nx>=sizeX-1 (and analogously for y,z)
+      // intentionally excludes the outermost cell layer from wavefront
+      // processing, matching the convention of the 2D implementation.
       for (int dx = -1; dx <= 1; dx++) {
         int nx = x + dx;
         if (nx <= 0 || nx >= sizeX - 1) continue;

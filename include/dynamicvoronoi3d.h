@@ -70,7 +70,6 @@ private:
   void setObstacle(int x, int y, int z);
   void removeObstacle(int x, int y, int z);
   inline void checkVoro(int x, int y, int z, int nx, int ny, int nz, dataCell& c, dataCell& nc);
-  void recheckVoro();
   void commitAndColorize(bool updateRealDist=true);
   inline void reviveVoroNeighbors(int& x, int& y, int& z);
 
@@ -91,8 +90,6 @@ private:
   int sizeZ;
   dataCell*** data;
   bool*** gridMap;
-
-  double sqrt2;
 };
 
 #endif
