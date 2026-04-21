@@ -4,7 +4,7 @@ project(dynamicvoronoi)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
+find_package(catkin QUIET COMPONENTS
   roscpp
 )
 
@@ -77,12 +77,14 @@ find_package(catkin REQUIRED COMPONENTS
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES dynamicvoronoi
-#  CATKIN_DEPENDS roscpp
-#  DEPENDS system_lib
-)
+if(catkin_FOUND)
+  catkin_package(
+    INCLUDE_DIRS include
+    LIBRARIES dynamicvoronoi
+  #  CATKIN_DEPENDS roscpp
+  #  DEPENDS system_lib
+  )
+endif()
 
 ###########
 ## Build ##
@@ -91,15 +93,20 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(include)
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
+if(catkin_FOUND)
+  include_directories(
+    ${catkin_INCLUDE_DIRS}
+  )
+endif()
 
 ## Declare a cpp library
 add_library(dynamicvoronoi
   src/bucketedqueue.cpp src/dynamicvoronoi.cpp
   src/bucketedqueue3d.cpp src/dynamicvoronoi3d.cpp
 )
+
+add_executable(example src/example.cpp)
+target_link_libraries(example dynamicvoronoi)
 
 ## Declare a cpp executable
 # add_executable(dynamicvoronoi_node src/dynamicvoronoi_node.cpp)
